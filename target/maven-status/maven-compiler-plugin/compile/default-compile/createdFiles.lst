@@ -1,0 +1,3 @@
+com/mb/userService/UserServiceApplication.class
+com/mb/userService/config/SecurityConfig.class
+com/mb/userService/config/EurekaRegistrationListener.class
