@@ -4,6 +4,7 @@ import com.mb.userService.dto.AuthResponseDto;
 import com.mb.userService.dto.LoginDto;
 import com.mb.userService.dto.UserDto;
 import com.mb.userService.dto.UserRegistrationDto;
+import com.mb.userService.exception.UserDataNotFoundException;
 import com.mb.userService.model.User;
 import com.mb.userService.repository.UserRepository;
 import com.mb.userService.service.UserService;
@@ -42,17 +43,17 @@ public class UserServiceImpl implements UserService {
 
             if (userRepository == null || passwordEncoder == null) {
                 logger.error("Dependencies not properly initialized");
-                throw new RuntimeException("Dependencies not initialized");
+                throw new UserDataNotFoundException("Dependencies not initialized");
             }
 
             if (existsByName(registrationDto.getName())) {
                 logger.warn("Name already exists: {}", registrationDto.getName());
-                throw new RuntimeException("Name already exists");
+                throw new UserDataNotFoundException("Name already exists");
             }
 
             if (existsByEmail(registrationDto.getEmail())) {
                 logger.warn("Email already exists: {}", registrationDto.getEmail());
-                throw new RuntimeException("Email already exists");
+                throw new UserDataNotFoundException("Email already exists");
             }
 
             User user = new User();
